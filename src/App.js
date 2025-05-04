@@ -8,9 +8,13 @@ const App = () => {
     { id: nanoid(), text: "this is second note!", date: "15/04/2025" },
     { id: nanoid(), text: "this is third note!", date: "15/04/2025" },
   ]);
+
+  const addNote = (text) => {
+    console.log(text);
+  };
   return (
     <div className="container">
-      <NoteList notes={notes} />
+      <NoteList notes={notes} handleAddNote={addNote} />
     </div>
   );
 };

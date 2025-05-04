@@ -1,49 +1,37 @@
 import React, { useState } from "react";
 
-const AddNote = () => {
+const AddNote = ({ handleAddNote }) => {
   const maxChars = 200;
   const [note, setNote] = useState("");
+  const [noteText, setNoteText] = useState("");
 
   const handleChange = (e) => {
     setNote(e.target.value);
   };
+
+  const handleSaveClick = () => {
+    if (note.trim().length > 0) {
+      handleAddNote(note);
+      setNote(""); // optional: clear after saving
+    }
+  };
   return (
-    <div style={styles.container}>
+    <div className="note-container">
       <textarea
         value={note}
         onChange={handleChange}
         maxLength={maxChars}
         placeholder="Write your note..."
-        style={styles.textarea}
+        className="text-area"
       />
-      <div style={styles.counter}>
+      <div className="note-counter">
         {maxChars - note.length} characters remaining
+        <button className="save" onClick={handleSaveClick}>
+          Save
+        </button>
       </div>
     </div>
   );
-};
-const styles = {
-  container: {
-    width: "100%",
-    maxWidth: "400px",
-    margin: "20px auto",
-    fontFamily: "sans-serif",
-  },
-  textarea: {
-    width: "100%",
-    minHeight: "170px",
-    borderRadius: "10px",
-    padding: "1rem",
-    fontSize: "16px",
-    border: "none",
-    backgroundColor: "#fef68a",
-  },
-  counter: {
-    textAlign: "right",
-    fontSize: "14px",
-    color: "#666",
-    marginTop: "5px",
-  },
 };
 
 export default AddNote;
